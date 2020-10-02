@@ -79,4 +79,6 @@ $ diesel migration run
 
 ## IMPLEMENTING HANDLERS
 
+`invitation_handler.rs` を作成、 `main.rs` に `mod invitation_handler;` を追記
 
+## TEST YOUR SERVER

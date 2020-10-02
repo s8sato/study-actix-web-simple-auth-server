@@ -9,6 +9,7 @@ use diesel::r2d2::{self, ConnectionManager};
 mod models;
 mod schema;
 mod errors;
+mod invitation_handler;
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
