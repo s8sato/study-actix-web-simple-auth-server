@@ -82,3 +82,9 @@ $ diesel migration run
 `invitation_handler.rs` を作成、 `main.rs` に `mod invitation_handler;` を追記
 
 ## TEST YOUR SERVER
+
+そもそもまだ build できてないので `curl` しようがないですね
+
+## USING SPARKPOST TO SEND REGISTRATION EMAIL
+
+
