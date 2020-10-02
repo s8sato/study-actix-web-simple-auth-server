@@ -87,4 +87,13 @@ $ diesel migration run
 
 ## USING SPARKPOST TO SEND REGISTRATION EMAIL
 
+`.env` に追記  
+`email_service.rs` を作成、 `main.rs` に `mod email_service;` を追記  
+`invitation_handler.rs` のコメントアウト
+```
+// use crate::email_service::send_invitation;
+// send_invitation(&invitation)
+```
+を解除
 
+## GET SOME HELP

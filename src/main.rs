@@ -10,6 +10,7 @@ mod models;
 mod schema;
 mod errors;
 mod invitation_handler;
+mod email_service;
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
