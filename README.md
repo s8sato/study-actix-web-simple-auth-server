@@ -74,3 +74,9 @@ $ diesel migration run
 とありますが当然まだエラーだらけです。ガッハッハ！
 
 ## OUR OWN ERROR RESPONSE TYPE
+
+`errors.rs` を作成、 `main.rs` に `mod errors;` を追記
+
+## IMPLEMENTING HANDLERS
+
+
