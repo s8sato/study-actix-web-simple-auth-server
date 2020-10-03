@@ -53,10 +53,10 @@ async fn main() -> std::io::Result<()> {
                         web::resource("/invitation")
                             .route(web::post().to(invitation_handler::post_invitation)),
                     )
-                    // .service(
-                    //     web::resource("/register/{invitation_id}")
-                    //         .route(web::post().to(register_handler::register_user)),
-                    // )
+                    .service(
+                        web::resource("/register/{invitation_id}")
+                            .route(web::post().to(register_handler::register_user)),
+                    )
                     // .service(
                     //     web::resource("/auth")
                     //         .route(web::post().to(auth_handler::login))

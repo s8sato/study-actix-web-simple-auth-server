@@ -142,3 +142,7 @@ curl --request POST \
 `register_handler.rs` を作成
 
 ## PARSING URL PARAMETERS
+
+`main.rs` を編集
+
+## TEST YOUR IMPLEMENTATION
