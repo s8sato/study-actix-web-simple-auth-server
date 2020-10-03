@@ -6,6 +6,8 @@
 [Sending Domains]: https://app.sparkpost.com/account/sending-domains
 [DNSレコード設定]: https://www.onamae.com/domain/navi/dns_controll/input
 
+# How to run
+
 # Log
 
 ## PREREQUISITE
@@ -136,3 +138,7 @@ curl --request POST \
 ![invitation_mail](images/invitation_mail.png)
 
 ## REGISTERING USER
+
+`register_handler.rs` を作成
+
+## PARSING URL PARAMETERS
