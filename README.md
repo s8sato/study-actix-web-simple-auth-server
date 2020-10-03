@@ -1,10 +1,12 @@
-# [Tutorial][Tutorial]
-
 [Tutorial]: https://gill.net.in/posts/auth-microservice-rust-actix-web1.0-diesel-complete-tutorial/
 [SparkPost]: https://www.sparkpost.com/
 [お名前.com]: https://www.onamae.com/
 [Sending Domains]: https://app.sparkpost.com/account/sending-domains
 [DNSレコード設定]: https://www.onamae.com/domain/navi/dns_controll/input
+
+# What's this
+
+A server created basically according to [THIS TUTORIAL][Tutorial]
 
 # How to run
 
@@ -24,45 +26,16 @@ cargo run
 
 ## client
 
+[Here](#test-your-implementation) is
 * Invitation request
-```
-curl --request POST \
-  --url http://localhost:3000/api/invitation \
-  --header 'content-type: application/json' \
-  --data '{"email":"name@domain.com"}'
-```
-
-![invited](images/invited.png)
-
 * Registration request
-```
-curl --request POST \
-  --url http://localhost:3000/api/register/964e9cc1-78af-4ca6-9d63-86f578086b4e \
-  --header 'content-type: application/json' \
-  --data '{"password":"password"}'
-```
 
-![registered](images/registered.png)
-
+[Here](#testing-logged-in-user) is
 * Login request
-```
-curl -i --request POST \
-  --url http://localhost:3000/api/auth \
-  --header 'content-type: application/json' \
-  --data '{"email": "name@domain.com","password":"password"}'
-```
-
-![logged_in](images/logged_in.png)
-
+* Get-me request
 * Logout request
-```
-curl -i --request DELETE \
-  --url http://localhost:3000/api/auth
-```
 
-![logged_out](images/logged_out.png)
-
-# Log
+# Study log
 
 ## PREREQUISITE
 
@@ -201,6 +174,7 @@ curl --request POST \
 
 ## TEST YOUR IMPLEMENTATION
 
+* Invitation request
 ```
 curl --request POST \
   --url http://localhost:3000/api/invitation \
@@ -210,6 +184,7 @@ curl --request POST \
 
 ![invited](images/invited.png)
 
+* Registration request
 ```
 curl --request POST \
   --url http://localhost:3000/api/register/964e9cc1-78af-4ca6-9d63-86f578086b4e \
@@ -225,6 +200,9 @@ curl --request POST \
 
 ## TEST RUN AUTH
 
+## TESTING LOGGED IN USER
+
+* Login request
 ```
 curl -i --request POST \
   --url http://localhost:3000/api/auth \
@@ -234,6 +212,17 @@ curl -i --request POST \
 
 ![logged_in](images/logged_in.png)
 
+* Get-me request
+```
+curl -i -n --request GET \
+  --url http://localhost:3000/api/auth \
+  --cookie auth=+dom99l8raCa6EG2poRFhdfdhCNGpmZoRm2M1U78hw9N5HvT5Zhlj9hw/1/DEKV71oi9Ib7NiA== \
+; echo
+```
+
+![get_me](images/get_me.png)
+
+* Logout request
 ```
 curl -i --request DELETE \
   --url http://localhost:3000/api/auth
@@ -241,4 +230,6 @@ curl -i --request DELETE \
 
 ![logged_out](images/logged_out.png)
 
-## TESTING LOGGED IN USER
+## WHAT’S NEXT
+
+とりあえず雪見だいふくを食べよう
