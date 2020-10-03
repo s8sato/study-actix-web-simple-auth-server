@@ -12,6 +12,7 @@ mod errors;
 mod invitation_handler;
 mod email_service;
 mod utils;
+mod register_handler;
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {

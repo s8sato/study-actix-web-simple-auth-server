@@ -146,3 +146,5 @@ curl --request POST \
 `main.rs` を編集
 
 ## TEST YOUR IMPLEMENTATION
+
+## LET’S DO AUTH
