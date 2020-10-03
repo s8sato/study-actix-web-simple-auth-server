@@ -8,6 +8,8 @@
 
 # How to run
 
+## server
+
 ```
 echo -n -e "\
 DATABASE_URL=postgres://username:password@localhost/your_database\n\
@@ -20,9 +22,9 @@ then
 cargo run
 ```
 
-On another terminal,
+## client
 
-* Invitation
+* Invitation request
 ```
 curl --request POST \
   --url http://localhost:3000/api/invitation \
@@ -32,7 +34,7 @@ curl --request POST \
 
 ![invited](images/invited.png)
 
-* Registration
+* Registration request
 ```
 curl --request POST \
   --url http://localhost:3000/api/register/964e9cc1-78af-4ca6-9d63-86f578086b4e \
@@ -41,6 +43,24 @@ curl --request POST \
 ```
 
 ![registered](images/registered.png)
+
+* Login request
+```
+curl -i --request POST \
+  --url http://localhost:3000/api/auth \
+  --header 'content-type: application/json' \
+  --data '{"email": "name@domain.com","password":"password"}'
+```
+
+![logged_in](images/logged_in.png)
+
+* Logout request
+```
+curl -i --request DELETE \
+  --url http://localhost:3000/api/auth
+```
+
+![logged_out](images/logged_out.png)
 
 # Log
 
@@ -205,3 +225,20 @@ curl --request POST \
 
 ## TEST RUN AUTH
 
+```
+curl -i --request POST \
+  --url http://localhost:3000/api/auth \
+  --header 'content-type: application/json' \
+  --data '{"email": "name@domain.com","password":"password"}'
+```
+
+![logged_in](images/logged_in.png)
+
+```
+curl -i --request DELETE \
+  --url http://localhost:3000/api/auth
+```
+
+![logged_out](images/logged_out.png)
+
+## TESTING LOGGED IN USER
