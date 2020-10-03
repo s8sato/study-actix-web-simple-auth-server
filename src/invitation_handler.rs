@@ -48,3 +48,13 @@ fn query(eml: String, pool: web::Data<Pool>) -> Result<Invitation, crate::errors
 
     Ok(inserted_invitation)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
+    #[test]
+    fn it_works() {
+        assert_eq!(2 + 2, 4);
+    }
+}

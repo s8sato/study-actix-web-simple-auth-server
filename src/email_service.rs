@@ -9,7 +9,7 @@ static ref API_KEY: String = std::env::var("SPARKPOST_API_KEY").expect("SPARKPOS
 }
 
 pub fn send_invitation(invitation: &Invitation) -> Result<(), ServiceError> {
-    let tm = Transmission::new_eu(API_KEY.as_str());
+    let tm = Transmission::new(API_KEY.as_str());
     let sending_email =
         std::env::var("SENDING_EMAIL_ADDRESS").expect("SENDING_EMAIL_ADDRESS must be set");
     // new email message with sender name and email
@@ -43,7 +43,7 @@ pub fn send_invitation(invitation: &Invitation) -> Result<(), ServiceError> {
     // complete the email message with details
     email
         .add_recipient(recipient)
-        .options(options)
+        // .options(options)
         .subject("You have been invited to join Simple-Auth-Server Rust")
         .html(email_body);
 

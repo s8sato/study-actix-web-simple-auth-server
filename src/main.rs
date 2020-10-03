@@ -11,6 +11,7 @@ mod schema;
 mod errors;
 mod invitation_handler;
 mod email_service;
+mod utils;
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {

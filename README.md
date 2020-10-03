@@ -1,6 +1,10 @@
-# [Tutorial][tutorial]
+# [Tutorial][Tutorial]
 
-[tutorial]: https://gill.net.in/posts/auth-microservice-rust-actix-web1.0-diesel-complete-tutorial/
+[Tutorial]: https://gill.net.in/posts/auth-microservice-rust-actix-web1.0-diesel-complete-tutorial/
+[SparkPost]: https://www.sparkpost.com/
+[お名前.com]: https://www.onamae.com/
+[Sending Domains]: https://app.sparkpost.com/account/sending-domains
+[DNSレコード設定]: https://www.onamae.com/domain/navi/dns_controll/input
 
 # Log
 
@@ -10,7 +14,7 @@
 
 ## LET’S BEGIN
 
-環境を確認します
+環境を確認
 ```
 $ uname -a
 Linux DESKTOP-HQJERCJ 4.19.104-microsoft-standard #1 SMP Wed Feb 19 06:37:35 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
@@ -28,14 +32,14 @@ cargo 1.46.0 (149022b1d 2020-07-17)
 ```
 
 `Cargo.toml` の `[dependencies]` に追記  
-そのあと色々やるも、どうも `argonautica` がらみで build できませんでした  
-`rust-argon2` に代えて、ひとまず build に成功です
+そのあと色々やるも、どうも `argonautica` がらみで build できない  
+代わりに `rust-argon2` を入れて、ひとまず build に成功
 
 ## SETUP THE BASE APP
 
 
 `models.rs` を作成、 `main.rs` を編集  
-`postgresql` `diesel_cli` が必要になるので用意します
+`postgresql` `diesel_cli` が必要になるので用意
 ```
 $ sudo apt-get install postgresql-12
 <!-- $ sudo apt install libpq-dev -->
@@ -51,7 +55,8 @@ $ echo DATABASE_URL=postgres://postgres:password@localhost/simple_auth > .env
 
 > At this stage your server should compile
 
-とのことですが `schema.rs` `utils.rs` `invitation_handler.rs` といったモジュールまだないのでコンパイル通らないはずです
+とのことですが、まだ `schema.rs` `utils.rs` `invitation_handler.rs` を作っていないので  
+コンパイルは通らないはずです
 
 ## SETTING UP DIESEL AND CREATING OUR USER MODEL
 
@@ -75,11 +80,11 @@ $ diesel migration run
 
 ## OUR OWN ERROR RESPONSE TYPE
 
-`errors.rs` を作成、 `main.rs` に `mod errors;` を追記
+`errors.rs` を作成
 
 ## IMPLEMENTING HANDLERS
 
-`invitation_handler.rs` を作成、 `main.rs` に `mod invitation_handler;` を追記
+`invitation_handler.rs` を作成
 
 ## TEST YOUR SERVER
 
@@ -87,8 +92,18 @@ $ diesel migration run
 
 ## USING SPARKPOST TO SEND REGISTRATION EMAIL
 
-`.env` に追記  
-`email_service.rs` を作成、 `main.rs` に `mod email_service;` を追記  
+`.env` に追記、下表はそのためにやったこと
+
+| どこで | なにを |
+| - | - |
+| [SparkPost][SparkPost] | アカウントを作る |
+| [お名前.com][お名前.com] | 安いドメインを買う |
+| SparkPost | [送信ドメイン][Sending Domains] に追加、 `DNS Settings` を確認 |
+| お名前.com | `DNS Settings` を [DNSレコード設定][DNSレコード設定] に追加登録 |
+| SparkPost | すこし待ってから `Verify TXT Record` |
+| SparkPost | APIキー生成 |
+
+`email_service.rs` を作成  
 `invitation_handler.rs` のコメントアウト
 ```
 // use crate::email_service::send_invitation;
@@ -97,3 +112,27 @@ $ diesel migration run
 を解除
 
 ## GET SOME HELP
+
+`utils.rs` を作成  
+* `argonautica` の代わりに `rust-argon2` で書いてみました
+
+`models.rs` を編集、
+```
+use serde::{Serialize, Deserialize};
+```
+を追記
+
+`email_service.rs` の `Transmission::new_eu` を `Transmission::new` に変更  
+`cargo run` するとサーバが起動するので別ターミナルから `curl` を叩きます
+```
+curl --request POST \
+  --url http://localhost:3000/api/invitation \
+  --header 'content-type: application/json' \
+  --data '{"email":"name@domain.com"}'
+```
+
+登録確認メールが届きました！
+
+![invitation_mail](images/invitation_mail.png)
+
+## REGISTERING USER
