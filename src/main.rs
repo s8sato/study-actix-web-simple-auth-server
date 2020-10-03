@@ -13,6 +13,7 @@ mod invitation_handler;
 mod email_service;
 mod utils;
 mod register_handler;
+mod auth_handler;
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
@@ -43,7 +44,7 @@ async fn main() -> std::io::Result<()> {
                     .path("/")
                     .domain(domain.as_str())
                     .max_age_time(chrono::Duration::days(1))
-                    .secure(false), // this can only be true if you have https
+                    .secure(false), // TODO this can only be true if you have https
             ))
             // limit the maximum amount of data that server will accept
             .data(web::JsonConfig::default().limit(4096))
@@ -58,12 +59,12 @@ async fn main() -> std::io::Result<()> {
                         web::resource("/register/{invitation_id}")
                             .route(web::post().to(register_handler::register_user)),
                     )
-                    // .service(
-                    //     web::resource("/auth")
-                    //         .route(web::post().to(auth_handler::login))
-                    //         .route(web::delete().to(auth_handler::logout))
-                    //         .route(web::get().to(auth_handler::get_me)),
-                    // ),
+                    .service(
+                        web::resource("/auth")
+                            .route(web::post().to(auth_handler::login))
+                            .route(web::delete().to(auth_handler::logout))
+                            .route(web::get().to(auth_handler::get_me)),
+                    ),
             )
     })
     .bind("127.0.0.1:3000")?

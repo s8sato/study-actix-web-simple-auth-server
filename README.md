@@ -8,6 +8,40 @@
 
 # How to run
 
+```
+echo -n -e "\
+DATABASE_URL=postgres://username:password@localhost/your_database\n\
+SPARKPOST_API_KEY='yourapikey'\n\
+SENDING_EMAIL_ADDRESS='register@yourdomain.com'\n\
+" > .env
+```
+then
+```
+cargo run
+```
+
+On another terminal,
+
+* Invitation
+```
+curl --request POST \
+  --url http://localhost:3000/api/invitation \
+  --header 'content-type: application/json' \
+  --data '{"email":"name@domain.com"}'
+```
+
+![invited](images/invited.png)
+
+* Registration
+```
+curl --request POST \
+  --url http://localhost:3000/api/register/964e9cc1-78af-4ca6-9d63-86f578086b4e \
+  --header 'content-type: application/json' \
+  --data '{"password":"password"}'
+```
+
+![registered](images/registered.png)
+
 # Log
 
 ## PREREQUISITE
@@ -147,4 +181,27 @@ curl --request POST \
 
 ## TEST YOUR IMPLEMENTATION
 
-## LET’S DO AUTH
+```
+curl --request POST \
+  --url http://localhost:3000/api/invitation \
+  --header 'content-type: application/json' \
+  --data '{"email":"name@domain.com"}'
+```
+
+![invited](images/invited.png)
+
+```
+curl --request POST \
+  --url http://localhost:3000/api/register/964e9cc1-78af-4ca6-9d63-86f578086b4e \
+  --header 'content-type: application/json' \
+  --data '{"password":"password"}'
+```
+
+![registered](images/registered.png)
+
+## AUTH HANDLING
+
+`auth_handler.rs` を作成、 `main.rs` を編集
+
+## TEST RUN AUTH
+
